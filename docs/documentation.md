@@ -59,6 +59,7 @@ Open the map to view destinations.
 Click Start to get directions.
 
 <img width="1161" height="584" alt="image" src="https://github.com/user-attachments/assets/9dd3f218-e79e-426b-b25d-49848c951050" />
+<img width="1106" height="860" alt="image" src="https://github.com/user-attachments/assets/d7a0c576-d9ac-421c-9875-67bba5fd1696" />
 
 Known Issues and Next Steps
 The client currently uses browser storage in demo mode.
