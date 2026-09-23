@@ -1,21 +1,17 @@
 {
-  "name": "final-project-server",
+  "name": "triplist-server",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "dev": "node --watch server.js",
     "start": "node server.js",
-    "dev": "node --env-file=.env --watch server.js",
-    "db:schema": "node --env-file=.env db/run.js db/schema.sql",
-    "db:seed": "node --env-file=.env db/run.js db/seed.sql",
-    "db:reset": "npm run db:schema && npm run db:seed"
-  },
-  "engines": {
-    "node": ">=20"
+    "db:init": "node scripts/init-db.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "pg": "^8.13.1"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
   }
 }

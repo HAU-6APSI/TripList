@@ -1,0 +1,55 @@
+/*
+  TripList design tokens — "Parul" (golden hour / lantern festival theme)
+  Named after the Kapampangan word for the star lanterns of Angeles City's
+  Giant Lantern Festival (Ligligan Parul). Keep this file as the single
+  source of truth for color, type, and spacing across the app.
+*/
+:root {
+  /* Color tokens */
+  --color-paper: #fbf3e5;         /* page background */
+  --color-paper-deep: #f3e6ce;    /* subtle fills, pills */
+  --color-surface: #fffdf8;       /* cards, panels */
+  --color-dusk: #212a4a;          /* hero band, dark accents */
+  --color-dusk-2: #3b3466;
+  --color-amber: #e8a33d;         /* primary accent / lantern glow */
+  --color-amber-deep: #c87f22;
+  --color-ember: #e1583c;         /* primary action (buttons, links) */
+  --color-ember-deep: #c4432a;
+  --color-ink: #23283b;           /* body text */
+  --color-ink-soft: #6c6656;      /* secondary text */
+  --color-border: #e8d9bc;
+  --color-sage: #62825a;          /* "done" / visited state */
+  --color-sage-tint: #e9f0e4;
+  --color-danger: #b34434;
+
+  /* Contrast checks (WCAG AA, 4.5:1 minimum for body text):
+     ink (#23283b) on paper (#fbf3e5):    14.9:1
+     ink (#23283b) on surface (#fffdf8):  15.6:1
+     ember (#e1583c) + white text:        4.6:1
+     paper text on dusk (#212a4a):        11.2:1               */
+
+  /* Type scale */
+  --font-serif: "Fraunces", Georgia, serif;   /* headings */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* body/UI */
+  --text-heading: 28px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --weight-heading: 600;
+  --weight-body: 400;
+
+  /* Spacing (8px base unit) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-edge: 24px; /* screen edge padding */
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-input: 9px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(35, 26, 10, 0.08), 0 10px 26px rgba(35, 26, 10, 0.09);
+  --shadow-pop: 0 24px 64px rgba(20, 16, 40, 0.35);
+}

@@ -1,0 +1,102 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  /* torn-postcard bottom edge */
+  clip-path: polygon(
+    0 0, 100% 0, 100% 94%, 96% 100%, 92% 94%, 88% 100%, 84% 94%, 80% 100%,
+    76% 94%, 72% 100%, 68% 94%, 64% 100%, 60% 94%, 56% 100%, 52% 94%, 48% 100%,
+    44% 94%, 40% 100%, 36% 94%, 32% 100%, 28% 94%, 24% 100%, 20% 94%, 16% 100%,
+    12% 94%, 8% 100%, 4% 94%, 0 100%
+  );
+  padding-bottom: 14px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: left;
+  display: block;
+  width: 100%;
+  position: relative;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, rotate 0.16s ease;
+}
+
+.card:nth-child(3n + 1) {
+  rotate: -0.6deg;
+}
+.card:nth-child(3n + 2) {
+  rotate: 0.5deg;
+}
+.card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(35, 26, 10, 0.16);
+  rotate: 0deg;
+}
+
+.washi {
+  position: absolute;
+  top: -9px;
+  left: 22px;
+  width: 58px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-amber),
+    var(--color-amber) 4px,
+    var(--color-amber-deep) 4px,
+    var(--color-amber-deep) 8px
+  );
+  opacity: 0.85;
+  rotate: -4deg;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.banner {
+  height: 118px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 14px;
+  background: linear-gradient(150deg, var(--color-dusk) 0%, var(--color-ember-deep) 120%);
+}
+
+.stamp {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px dashed rgba(251, 243, 229, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper);
+  transform: rotate(8deg);
+}
+
+.body {
+  padding: 16px 20px 6px;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.dates {
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--color-ink-soft);
+}
+
+.meta {
+  margin-top: 11px;
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--color-ink-soft);
+}
+
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

@@ -1,0 +1,107 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  font-size: 16.5px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-dusk);
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: var(--color-paper-deep);
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.progressSummary {
+  margin: 16px 0 4px;
+  padding: 12px 13px;
+  border-radius: 11px;
+  background: linear-gradient(110deg, rgba(98, 130, 90, 0.12), rgba(232, 163, 61, 0.1));
+  border: 1px solid rgba(98, 130, 90, 0.18);
+}
+
+.progressCopy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-ink-soft);
+  font-size: 12px;
+}
+
+.progressCopy strong {
+  color: var(--color-sage);
+  font-size: 13px;
+}
+
+.progressTrack {
+  height: 6px;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(98, 130, 90, 0.16);
+}
+
+.progressTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-sage), #9bbd77);
+  transition: width 0.25s ease;
+}
+
+.emptyText {
+  font-size: 13.5px;
+  color: var(--color-ink-soft);
+  padding: 12px 4px 0;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 14px;
+  padding-left: 6px;
+  border-top: 1px solid rgba(232, 217, 188, 0.7);
+  padding-top: 5px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  bottom: 6px;
+  width: 0;
+  border-left: 2px dashed var(--color-border);
+}
+
+.addRow {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px;
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-input);
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.addRow:hover {
+  border-color: var(--color-ember);
+  color: var(--color-ember);
+  background: rgba(225, 88, 60, 0.06);
+}

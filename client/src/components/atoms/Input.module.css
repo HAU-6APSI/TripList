@@ -1,0 +1,21 @@
+.control {
+  width: 100%;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-input);
+  padding: 11px 13px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.control:focus {
+  border-color: var(--color-ember);
+  background: #fff;
+  outline: none;
+}
+
+textarea.control {
+  resize: vertical;
+  min-height: 84px;
+}

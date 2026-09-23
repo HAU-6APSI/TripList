@@ -1,0 +1,137 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  position: sticky;
+  top: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 767px) {
+  .card {
+    position: static;
+  }
+}
+
+.canvas {
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+  background: #dfe8e1;
+}
+
+.fallback {
+  background: #dfe8e1;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(251, 243, 229, 0.82);
+  font-size: 13px;
+  text-align: center;
+  padding: 20px;
+  gap: 8px;
+}
+
+.embedFallback {
+  position: absolute;
+  inset: 0;
+}
+
+.embedFallback iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mapHint {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: #314b4c;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 10px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(25, 45, 45, 0.16);
+}
+
+.selectedPlace {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(232, 217, 188, 0.9);
+  border-radius: 10px;
+  background: rgba(255, 253, 248, 0.97);
+  color: var(--color-ink);
+  box-shadow: 0 8px 24px rgba(35, 26, 10, 0.2);
+  z-index: 2;
+}
+
+.selectedPlace > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.selectedPlace strong,
+.selectedPlace span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectedPlace strong {
+  color: var(--color-dusk);
+  font-size: 13px;
+}
+
+.selectedPlace span {
+  margin-top: 3px;
+  color: var(--color-ink-soft);
+  font-size: 11px;
+}
+
+.selectedPlace button:not(.dismiss) {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: #fffaf0;
+  background: var(--color-ember);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.selectedPlace button:not(.dismiss):hover {
+  background: var(--color-ember-deep);
+}
+
+.dismiss {
+  align-self: flex-start;
+  border: 0;
+  padding: 0 2px;
+  color: var(--color-ink-soft);
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.footer {
+  padding: 13px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  border-top: 1px solid var(--color-border);
+}

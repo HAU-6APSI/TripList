@@ -1,0 +1,97 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  font-size: 16.5px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-dusk);
+}
+
+.count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: var(--color-paper-deep);
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.emptyText {
+  font-size: 13.5px;
+  color: var(--color-ink-soft);
+  padding: 12px 4px 0;
+}
+
+/* corkboard itinerary: a dashed "string" connecting each pin */
+.timeline {
+  position: relative;
+  margin-top: 14px;
+  padding-left: 6px;
+  border-top: 1px solid rgba(232, 217, 188, 0.7);
+  padding-top: 5px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  bottom: 6px;
+  width: 0;
+  border-left: 2px dashed var(--color-border);
+}
+
+.addRow {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px;
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-input);
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.addRow:hover {
+  border-color: var(--color-ember);
+  color: var(--color-ember);
+  background: rgba(225, 88, 60, 0.06);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px dashed var(--color-border);
+  background: var(--color-paper);
+  padding: 7px 13px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: all 0.12s ease;
+}
+.chip:hover {
+  border-color: var(--color-amber-deep);
+  border-style: solid;
+  color: var(--color-amber-deep);
+  background: rgba(232, 163, 61, 0.12);
+}

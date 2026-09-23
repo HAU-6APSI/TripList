@@ -1,0 +1,9 @@
+.duskband {
+  background: linear-gradient(160deg, var(--color-dusk) 0%, var(--color-dusk-2) 46%, var(--color-amber-deep) 100%);
+}
+
+.wrap {
+  padding: var(--space-4) 0 60px;
+  display: flex;
+  justify-content: center;
+}

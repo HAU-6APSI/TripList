@@ -1,0 +1,85 @@
+@import "./tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  background-image: linear-gradient(180deg, rgba(255, 253, 248, 0.26), transparent 34%),
+    radial-gradient(circle at 12% 18%, rgba(232, 163, 61, 0.1) 0, transparent 45%),
+    radial-gradient(circle at 85% 6%, rgba(225, 88, 60, 0.08) 0, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(33, 42, 74, 0.05) 0, transparent 50%);
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-heading);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+input,
+textarea,
+button {
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-edge);
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 var(--space-2);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}

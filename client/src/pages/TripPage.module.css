@@ -1,0 +1,138 @@
+.duskband {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-dusk) 0%, var(--color-dusk-2) 46%, var(--color-amber-deep) 100%);
+  color: var(--color-paper);
+  box-shadow: 0 10px 30px rgba(33, 42, 74, 0.16);
+}
+.duskband::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 90% at 88% 0%, rgba(255, 214, 140, 0.28), transparent 60%);
+  pointer-events: none;
+}
+
+.heroMini {
+  position: relative;
+  z-index: 2;
+  padding: 10px 0 34px;
+}
+.heroMini h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.02em;
+  color: var(--color-paper);
+}
+.dates {
+  margin-top: 6px;
+  color: rgba(251, 243, 229, 0.75);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.heroActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.formWrap {
+  padding: var(--space-4) 0 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  padding: 34px 0 70px;
+  align-items: start;
+}
+@media (max-width: 767px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notesCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  box-shadow: var(--shadow-card);
+}
+.notesHeading {
+  font-size: 16.5px;
+}
+.notesHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.notesSub {
+  margin-top: 3px;
+  color: var(--color-ink-soft);
+  font-size: 12px;
+}
+.noteCount {
+  color: var(--color-ink-soft);
+  font-size: 11px;
+  white-space: nowrap;
+  padding-top: 3px;
+}
+.notesArea {
+  width: 100%;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-input);
+  padding: 12px;
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+  background-color: var(--color-paper);
+  background-image: linear-gradient(rgba(232, 217, 188, 0.4) 1px, transparent 1px);
+  background-size: 100% 28px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-ink);
+}
+.notesArea:focus {
+  border-color: var(--color-ember);
+  background: #fff;
+  outline: none;
+}
+.savedHint {
+  font-size: 11.5px;
+  color: var(--color-ink-soft);
+  margin-top: 6px;
+}
+.notesFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 7px;
+  color: var(--color-ink-soft);
+  font-size: 11px;
+}
+
+.notFound {
+  border: 1.5px dashed var(--color-border);
+  border-radius: 18px;
+  padding: 56px 24px;
+  text-align: center;
+  background: var(--color-surface);
+  margin-top: 32px;
+}
+.notFound h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+.notFound p {
+  color: var(--color-ink-soft);
+  font-size: 14.5px;
+  margin-bottom: 20px;
+}

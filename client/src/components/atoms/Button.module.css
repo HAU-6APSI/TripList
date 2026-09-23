@@ -1,0 +1,67 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 11px 20px;
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--color-ember);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(225, 88, 60, 0.35);
+}
+.primary:hover:not([disabled]) {
+  background: var(--color-ember-deep);
+}
+
+/* For use on the dusk hero band */
+.ghost {
+  background: rgba(251, 243, 229, 0.1);
+  color: var(--color-paper);
+  border: 1.5px solid rgba(251, 243, 229, 0.35);
+}
+.ghost:hover:not([disabled]) {
+  background: rgba(251, 243, 229, 0.18);
+}
+
+/* For use on light surfaces */
+.ghostLight {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-border);
+}
+.ghostLight:hover:not([disabled]) {
+  border-color: var(--color-ink-soft);
+}
+
+.danger {
+  background: transparent;
+  color: var(--color-danger);
+}
+.danger:hover:not([disabled]) {
+  background: rgba(179, 68, 52, 0.08);
+}
+
+.text {
+  background: transparent;
+  color: var(--color-ink-soft);
+  padding: 8px 10px;
+}
+.text:hover:not([disabled]) {
+  color: var(--color-ink);
+}
