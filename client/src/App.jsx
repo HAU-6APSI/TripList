@@ -21,7 +21,7 @@ export default function App() {
   const dataStore = import.meta.env.VITE_USE_MOCK_API === "false" ? apiStore : store;
 
   useEffect(() => {
-    dataStore.getTrips().then(setTrips).catch((err) => setError(err.message));
+    Promise.resolve(dataStore.getTrips()).then(setTrips).catch((err) => setError(err.message));
   }, []);
 
   async function refresh() {
