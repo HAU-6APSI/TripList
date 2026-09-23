@@ -1,48 +1,33 @@
-# Weekly reports
+I built the first working version of TripList.
+The app helps users plan trips around Angeles City, Pampanga.
+The app can now:
 
-Five minutes a week. Add a new section at the top; never edit an old one.
+Create a trip
+Add destinations
+Add activities
+Add trip notes
+Mark destinations as Next, OTW, or Done
+Show destinations on a map
+Open Google Maps directions
+Add a place from the map to the destination list
+Recommend places for sisig, coffee, restaurants, breakfast, desserts, and nightlife
+Save trip data in the browser
+Show a starter trip for new users
+Use an Angeles City and Pampanga-inspired design
+I also added a public GitHub repository and prepared the project for GitHub Pages.
 
-The value is entirely in writing them **while it is happening**. What took four
-hours and why is invisible a month later, and it is exactly what your journal
-needs.
+Stuck
+The client is working in demo mode using browser storage.
 
----
+The Express API and PostgreSQL database are not connected to the client yet.
 
-## Week of 2026-09-23
+The live Google Maps features need a Google Maps API key.
 
-**Done.** I built the first working version of TripList for Angeles City,
-Pampanga. The app can create trips and save destinations, activities, and
-notes. Destinations can be marked as Next, OTW, or Done. The app also has a
-Google Maps view, map-linked destinations, and a Start button for directions.
-I added local suggestions for sisig, coffee, restaurants, breakfast, dessert,
-and nightlife. I also improved the layout and added an Angeles City-inspired
-design.
+Hours
+I worked for approximately 3 hours.
 
-**Stuck.** The app uses browser storage in demo mode. The Express API and
-PostgreSQL database are not connected to the client yet. The live Google Maps
-features also need a restricted Google Maps API key.
-
-**Hours.** Replace this with your real total: **[your hours]**.
-
-**Next.** Connect the client to the Express API. Then set up PostgreSQL and
-test the full app with real data.
-
----
-
-## Week of YYYY-MM-DD
-
-**Done.** What actually works now, in the deployed app rather than on your laptop.
-
-**Stuck.** What is not working, and the most specific description you can give.
-"CORS" is not specific. "The preflight OPTIONS returns 404 because my router is
-mounted above cors" is.
-
-**Hours.** Roughly. You will need this to estimate anything, ever.
-
-**Next.** One or two things, not a wish list.
-
----
-
-## Week of YYYY-MM-DD
-
-...
+Next
+I will connect the client to the Express API.
+I will set up PostgreSQL and test the full system.
+I will enable GitHub Pages and test the live website.
+I will continue improving the documentation and security checklist.
