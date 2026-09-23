@@ -4,6 +4,7 @@ import TripListPage from "./pages/TripListPage.jsx";
 import NewTripPage from "./pages/NewTripPage.jsx";
 import TripPage from "./pages/TripPage.jsx";
 import * as store from "./lib/storage.js";
+import { googleMapsDirectionsUrl } from "./lib/googleMaps.js";
 
 /**
  * App — top-level routing and state.
@@ -71,6 +72,21 @@ function TripPageRoute({ trips, refresh }) {
       onUpdateDestinationStatus={(destId, status) => {
         store.updateDestinationStatus(id, destId, status);
         refresh();
+      }}
+      onStartNavigation={(destination) => {
+        if (!destination) return;
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => window.open(googleMapsDirectionsUrl(destination, {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }), "_blank", "noopener,noreferrer"),
+            () => window.open(googleMapsDirectionsUrl(destination), "_blank", "noopener,noreferrer"),
+            { enableHighAccuracy: true, timeout: 5000 },
+          );
+        } else {
+          window.open(googleMapsDirectionsUrl(destination), "_blank", "noopener,noreferrer");
+        }
       }}
       onRemoveDestination={(destId) => {
         store.removeDestination(id, destId);

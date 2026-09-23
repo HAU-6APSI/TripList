@@ -11,6 +11,11 @@ import styles from "./TripListPage.module.css";
  */
 export default function TripListPage({ trips }) {
   const navigate = useNavigate();
+  const destinationCount = trips.reduce((total, trip) => total + (trip.destinations || []).length, 0);
+  const completedCount = trips.reduce(
+    (total, trip) => total + (trip.destinations || []).filter((destination) => destination.status === "done" || destination.done).length,
+    0,
+  );
 
   return (
     <>
@@ -36,8 +41,37 @@ export default function TripListPage({ trips }) {
         </section>
       </div>
 
-      <main className="container">
-        <TripGrid trips={trips} onNewTrip={() => navigate("/trips/new")} />
+      <main className={`${styles.content} container`}>
+        <div className={styles.dashboard}>
+          <section className={styles.tripsSection}>
+            <div className={styles.sectionHeading}>
+              <div>
+                <span className={styles.kicker}>Your itinerary shelf</span>
+                <h2>{trips.length ? "Trips in progress" : "Start your next chapter"}</h2>
+              </div>
+              {trips.length > 0 && <span className={styles.tripCount}>{trips.length} trip{trips.length === 1 ? "" : "s"}</span>}
+            </div>
+            <TripGrid trips={trips} onNewTrip={() => navigate("/trips/new")} />
+          </section>
+
+          <aside className={styles.overview}>
+            <div className={styles.overviewTop}>
+              <span className={styles.kicker}>Planning pulse</span>
+              <span className={styles.pulseDot} />
+            </div>
+            <h2>Make room for the good stuff.</h2>
+            <p>Keep your places, food stops, and small plans together before the weekend arrives.</p>
+            <div className={styles.stats}>
+              <div><strong>{trips.length}</strong><span>trips</span></div>
+              <div><strong>{destinationCount}</strong><span>places saved</span></div>
+              <div><strong>{completedCount}</strong><span>checked off</span></div>
+            </div>
+            <div className={styles.cityNote}>
+              <span className={styles.noteMark}>✦</span>
+              <div><strong>Angeles City, Pampanga</strong><span>Good food, easy detours, and a little more time outside.</span></div>
+            </div>
+          </aside>
+        </div>
       </main>
     </>
   );

@@ -8,7 +8,7 @@ import styles from "./DestinationList.module.css";
  * Props: destinations, onToggle(id), onRemove(id), onAdd (opens the Add
  * Destination form/modal), onQuickAdd(name) (adds a suggested place directly)
  */
-export default function DestinationList({ destinations, onToggle, onUpdateStatus, onRemove, onAdd, onQuickAdd }) {
+export default function DestinationList({ destinations, onToggle, onUpdateStatus, onStartNavigation, onRemove, onAdd, onQuickAdd }) {
   const suggestions = PLACES.filter((p) => !destinations.some((d) => d.name === p.name));
 
   return (
@@ -36,6 +36,7 @@ export default function DestinationList({ destinations, onToggle, onUpdateStatus
               status={d.status || (d.done ? "done" : "next")}
               onToggle={() => onToggle(d.id)}
               onUpdateStatus={(status) => onUpdateStatus(d.id, status)}
+              onStartNavigation={() => onStartNavigation(d)}
               onRemove={() => onRemove(d.id)}
             />
           ))}

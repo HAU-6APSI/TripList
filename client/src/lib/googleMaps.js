@@ -35,3 +35,11 @@ export function googleMapsSearchUrl(name) {
 export function googleMapsEmbedUrl(name) {
   return `https://www.google.com/maps?q=${encodeURIComponent(`${name}, Angeles City, Philippines`)}&output=embed`;
 }
+
+export function googleMapsDirectionsUrl(destination, origin) {
+  const target = Number.isFinite(destination.lat) && Number.isFinite(destination.lng)
+    ? `${destination.lat},${destination.lng}`
+    : `${destination.name}, Angeles City, Pampanga, Philippines`;
+  const originParam = origin ? `&origin=${encodeURIComponent(`${origin.lat},${origin.lng}`)}` : "";
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(target)}${originParam}&travelmode=driving`;
+}

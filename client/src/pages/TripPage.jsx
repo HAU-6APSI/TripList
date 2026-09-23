@@ -24,6 +24,7 @@ export default function TripPage({
   onAddDestination,
   onToggleDestination,
   onUpdateDestinationStatus,
+  onStartNavigation,
   onRemoveDestination,
   onAddActivity,
   onToggleActivity,
@@ -133,6 +134,7 @@ export default function TripPage({
               destinations={destinations}
               onToggle={onToggleDestination}
               onUpdateStatus={onUpdateDestinationStatus}
+              onStartNavigation={onStartNavigation}
               onRemove={onRemoveDestination}
               onAdd={() => setModal("destination")}
               onQuickAdd={(name) => onAddDestination({ name, notes: "" })}

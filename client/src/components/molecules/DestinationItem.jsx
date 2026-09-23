@@ -1,4 +1,4 @@
-import { TrashIcon } from "../../lib/icons.jsx";
+import { NavigationIcon, TrashIcon } from "../../lib/icons.jsx";
 import styles from "./DestinationItem.module.css";
 
 /**
@@ -11,7 +11,7 @@ const STATUS_OPTIONS = [
   { value: "done", label: "Done" },
 ];
 
-export default function DestinationItem({ name, notes, address, status, onUpdateStatus, onRemove }) {
+export default function DestinationItem({ name, notes, address, status, onUpdateStatus, onStartNavigation, onRemove }) {
   return (
     <div className={styles.row}>
       <div className={styles.text}>
@@ -32,6 +32,10 @@ export default function DestinationItem({ name, notes, address, status, onUpdate
           </button>
         ))}
       </div>
+      <button className={styles.start} type="button" onClick={onStartNavigation} aria-label={`Start navigation to ${name}`}>
+        <NavigationIcon size={13} />
+        <span>Start</span>
+      </button>
       <button className={styles.remove} onClick={onRemove} aria-label={`Remove ${name}`}>
         <TrashIcon size={15} />
       </button>

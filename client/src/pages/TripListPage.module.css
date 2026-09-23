@@ -50,3 +50,194 @@
   max-width: 460px;
   line-height: 1.55;
 }
+
+.content {
+  position: relative;
+  isolation: isolate;
+  max-width: none;
+  padding-left: max(var(--space-edge), calc((100vw - 1080px) / 2));
+  padding-right: max(var(--space-edge), calc((100vw - 1080px) / 2));
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  min-height: 100%;
+  background-image: linear-gradient(rgba(251, 243, 229, 0.88), rgba(251, 243, 229, 0.94)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Angeles%20Heritage%20District.jpg?width=2200");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.42;
+}
+
+.content::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: radial-gradient(circle at 12% 10%, rgba(225, 88, 60, 0.1), transparent 24%),
+    radial-gradient(circle at 84% 70%, rgba(232, 163, 61, 0.12), transparent 30%);
+  pointer-events: none;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.75fr);
+  gap: 28px;
+  padding: 34px 0 70px;
+  align-items: start;
+}
+
+.tripsSection {
+  min-width: 0;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 18px;
+}
+
+.sectionHeading h2,
+.overview h2 {
+  margin-top: 5px;
+  color: var(--color-dusk);
+  font-size: 25px;
+}
+
+.kicker {
+  color: var(--color-ember);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.tripCount {
+  color: var(--color-ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+  padding-bottom: 3px;
+}
+
+.overview {
+  position: sticky;
+  top: 24px;
+  padding: 24px;
+  border: 1px solid rgba(232, 217, 188, 0.95);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fffdf8, #f4e8d2);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.overview::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  right: -74px;
+  top: -72px;
+  border: 1px solid rgba(232, 163, 61, 0.34);
+  border-radius: 50%;
+  box-shadow: 0 0 0 20px rgba(232, 163, 61, 0.08), 0 0 0 40px rgba(232, 163, 61, 0.05);
+}
+
+.overviewTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  box-shadow: 0 0 0 5px rgba(98, 130, 90, 0.14);
+}
+
+.overview p {
+  margin-top: 10px;
+  color: var(--color-ink-soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 22px;
+  padding-top: 17px;
+  border-top: 1px solid var(--color-border);
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stats strong {
+  color: var(--color-dusk);
+  font-family: var(--font-serif);
+  font-size: 25px;
+}
+
+.stats span {
+  color: var(--color-ink-soft);
+  font-size: 10px;
+}
+
+.cityNote {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 12px;
+  border-radius: 10px;
+  color: var(--color-paper);
+  background: var(--color-dusk);
+}
+
+.noteMark {
+  color: var(--color-amber);
+  font-size: 18px;
+}
+
+.cityNote div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cityNote strong {
+  font-size: 12px;
+}
+
+.cityNote span:last-child {
+  color: rgba(251, 243, 229, 0.72);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+@media (max-width: 820px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .overview {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .content {
+    padding-left: var(--space-2);
+    padding-right: var(--space-2);
+  }
+}

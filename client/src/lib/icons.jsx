@@ -106,6 +106,16 @@ export function CompassIcon(props) {
   );
 }
 
+export function NavigationIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M12 22V2" />
+      <path d="m5 9 7-7 7 7" />
+      <path d="M5 15h14" />
+    </Svg>
+  );
+}
+
 export function StarIcon({ size = 18, filled = false, ...rest }) {
   return (
     <svg
