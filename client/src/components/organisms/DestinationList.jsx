@@ -32,6 +32,7 @@ export default function DestinationList({ destinations, onToggle, onUpdateStatus
               key={d.id}
               name={d.name}
               notes={d.notes}
+              address={d.address}
               status={d.status || (d.done ? "done" : "next")}
               onToggle={() => onToggle(d.id)}
               onUpdateStatus={(status) => onUpdateStatus(d.id, status)}

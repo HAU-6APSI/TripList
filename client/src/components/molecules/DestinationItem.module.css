@@ -71,6 +71,13 @@
   margin-top: 2px;
 }
 
+.address {
+  margin-top: 3px;
+  color: var(--color-ink-soft);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 .remove {
   background: none;
   border: none;

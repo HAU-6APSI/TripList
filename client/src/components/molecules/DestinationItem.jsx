@@ -11,11 +11,12 @@ const STATUS_OPTIONS = [
   { value: "done", label: "Done" },
 ];
 
-export default function DestinationItem({ name, notes, status, onUpdateStatus, onRemove }) {
+export default function DestinationItem({ name, notes, address, status, onUpdateStatus, onRemove }) {
   return (
     <div className={styles.row}>
       <div className={styles.text}>
         <div className={`${styles.name} ${status === "done" ? styles.done : ""}`}>{name}</div>
+        {address && address !== notes && <div className={styles.address}>{address}</div>}
         {notes && <div className={styles.notes}>{notes}</div>}
       </div>
       <div className={styles.statuses} role="group" aria-label={`Status for ${name}`}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import FormField from "../molecules/FormField.jsx";
 import Button from "../atoms/Button.jsx";
+import { getActivityRecommendations } from "../../lib/places.js";
 import styles from "./AddItemModal.module.css";
 
 /**
@@ -11,6 +12,7 @@ import styles from "./AddItemModal.module.css";
 export default function AddItemModal({ kind, tripName, onSave, onCancel }) {
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
+  const recommendations = kind === "activity" ? getActivityRecommendations(name) : [];
 
   useEffect(() => {
     document.getElementById("item-name")?.focus();
@@ -49,14 +51,36 @@ export default function AddItemModal({ kind, tripName, onSave, onCancel }) {
             />
           </>
         ) : (
-          <FormField
-            label="What do you want to do?"
-            htmlFor="item-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Try sisig at a local karinderya"
-            required
-          />
+          <>
+            <FormField
+              label="What do you want to do?"
+              htmlFor="item-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Try sisig at a local karinderya"
+              required
+            />
+            {recommendations.length > 0 && (
+            <div className={styles.recommendations}>
+              <div className={styles.recommendationIntro}>
+                <strong>Local ideas</strong>
+                <span>Tap one to use it</span>
+              </div>
+              {recommendations.map((recommendation) => (
+                <div key={recommendation.label} className={styles.recommendationGroup}>
+                  <span className={styles.recommendationLabel}>{recommendation.label}</span>
+                  <div className={styles.recommendationChips}>
+                    {recommendation.places.map((place) => (
+                      <button key={place} type="button" className={styles.recommendationChip} onClick={() => setName(place)}>
+                        {place}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            )}
+          </>
         )}
 
         <div className={styles.actions}>

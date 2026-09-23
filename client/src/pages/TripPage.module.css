@@ -1,26 +1,47 @@
 .duskband {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--color-dusk) 0%, var(--color-dusk-2) 46%, var(--color-amber-deep) 100%);
+  background-image: linear-gradient(180deg, rgba(20, 26, 52, 0.68), rgba(33, 42, 74, 0.9)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Angeles%20Heritage%20District.jpg?width=2200");
+  background-position: center 52%;
+  background-size: cover;
   color: var(--color-paper);
-  box-shadow: 0 10px 30px rgba(33, 42, 74, 0.16);
+  box-shadow: 0 12px 34px rgba(33, 42, 74, 0.2);
 }
 .duskband::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 90% at 88% 0%, rgba(255, 214, 140, 0.28), transparent 60%);
+  background: radial-gradient(ellipse 60% 90% at 88% 0%, rgba(255, 214, 140, 0.2), transparent 60%),
+    linear-gradient(90deg, rgba(33, 42, 74, 0.18), transparent 56%, rgba(225, 88, 60, 0.18));
   pointer-events: none;
 }
 
 .heroMini {
   position: relative;
   z-index: 2;
-  padding: 10px 0 34px;
+  min-height: 290px;
+  padding: 42px 0 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.heroEyebrow {
+  color: var(--color-amber);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 11px;
 }
 .heroMini h1 {
-  font-size: clamp(28px, 4vw, 42px);
+  max-width: 780px;
+  font-size: clamp(36px, 7vw, 68px);
   letter-spacing: -0.02em;
+  line-height: 0.98;
+  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.22);
   color: var(--color-paper);
 }
 .dates {
@@ -30,11 +51,13 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  justify-content: center;
 }
 .heroActions {
   display: flex;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 22px;
+  justify-content: center;
 }
 
 .formWrap {
@@ -49,6 +72,14 @@
   gap: 28px;
   padding: 34px 0 70px;
   align-items: start;
+}
+
+.layout > div:first-child {
+  min-width: 0;
+}
+
+.layout > div:last-child {
+  min-width: 0;
 }
 @media (max-width: 767px) {
   .layout {

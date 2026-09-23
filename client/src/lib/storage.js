@@ -83,10 +83,10 @@ function withTrip(id, fn) {
   return trip;
 }
 
-export function addDestination(tripId, { name, notes = "" }) {
+export function addDestination(tripId, { name, notes = "", address = "", lat = null, lng = null }) {
   return withTrip(tripId, (trip) => {
     trip.destinations = trip.destinations || [];
-    trip.destinations.push({ id: uid(), name, notes, status: "next" });
+    trip.destinations.push({ id: uid(), name, notes, address, lat, lng, status: "next" });
   });
 }
 

@@ -105,6 +105,7 @@ export default function TripPage({
       <div className={styles.duskband}>
         <Navbar backTo="/" />
         <section className={`${styles.heroMini} container`}>
+          <div className={styles.heroEyebrow}>Angeles City · Pampanga, Philippines</div>
           <h1>{trip.name}</h1>
           <div className={styles.dates}>
             <CalendarIcon size={14} />

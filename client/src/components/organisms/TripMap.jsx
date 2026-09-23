@@ -54,15 +54,17 @@ export default function TripMap({ destinations, onAddDestination }) {
           });
         });
         const locations = await Promise.all(
-          destinations.slice(0, 20).map(
-            (destination) =>
-              new Promise((resolve) => {
-                geocoder.geocode(
-                  { address: `${destination.name}, Angeles City, Philippines` },
-                  (results, status) => resolve(status === "OK" && results[0] ? { destination, location: results[0].geometry.location } : null),
-                );
-              }),
-          ),
+          destinations.slice(0, 20).map((destination) => {
+            if (Number.isFinite(destination.lat) && Number.isFinite(destination.lng)) {
+              return Promise.resolve({ destination, location: new maps.LatLng(destination.lat, destination.lng) });
+            }
+            return new Promise((resolve) => {
+              geocoder.geocode(
+                { address: `${destination.name}, Angeles City, Pampanga, Philippines` },
+                (results, status) => resolve(status === "OK" && results[0] ? { destination, location: results[0].geometry.location } : null),
+              );
+            });
+          }),
         );
         if (disposed) return;
 
@@ -137,7 +139,14 @@ export default function TripMap({ destinations, onAddDestination }) {
             <button
               type="button"
               onClick={() => {
-                onAddDestination?.({ name: selectedPlace.name, notes: selectedPlace.address });
+                const coordinates = selectedPlace.location.toJSON();
+                onAddDestination?.({
+                  name: selectedPlace.name,
+                  notes: selectedPlace.address,
+                  address: selectedPlace.address,
+                  lat: coordinates.lat,
+                  lng: coordinates.lng,
+                });
                 setSelectedPlace(null);
                 if (selectedMarkerRef.current) selectedMarkerRef.current.setMap(null);
               }}

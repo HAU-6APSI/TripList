@@ -4,7 +4,7 @@
   border-radius: 18px;
   overflow: hidden;
   position: sticky;
-  top: 20px;
+  top: 24px;
   box-shadow: var(--shadow-card);
 }
 
@@ -15,10 +15,16 @@
 }
 
 .canvas {
-  height: 350px;
+  height: clamp(560px, calc(100vh - 150px), 760px);
   position: relative;
   overflow: hidden;
   background: #dfe8e1;
+}
+
+@media (max-width: 767px) {
+  .canvas {
+    height: 390px;
+  }
 }
 
 .fallback {
