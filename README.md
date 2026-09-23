@@ -62,4 +62,16 @@ compose.yml  Local PostgreSQL and API setup
 
 The demo client is live and working. The real API is implemented but still needs a hosted PostgreSQL database and API deployment.
 
+## Deploy the API
+
+The repository includes `render.yaml` for a Render web service.
+
+1. Create a PostgreSQL database with Neon, Supabase, or another host.
+2. Create a Render Blueprint from this repository.
+3. Set `DATABASE_URL` to the database connection string.
+4. Set `CORS_ORIGINS` to `https://hau-6apsi.github.io`.
+5. Check `https://your-api-url.com/api/health`.
+6. Set `VITE_USE_MOCK_API=false` and `VITE_API_BASE_URL` in GitHub Actions variables.
+7. Run the Pages workflow again.
+
 See [server/README.md](server/README.md) for API routes and [AI-USAGE.md](AI-USAGE.md) for AI use.
