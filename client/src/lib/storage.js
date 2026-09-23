@@ -90,6 +90,17 @@ function createStarterTrip() {
 
 export function getTrips() {
   const trips = readAll();
+  const emptyStarter = trips.find((trip) => trip.name === "Clark" && !(trip.destinations || []).length && !(trip.activities || []).length && !trip.notes);
+  if (emptyStarter) {
+    const starterTrip = createStarterTrip();
+    Object.assign(emptyStarter, {
+      destinations: starterTrip.destinations,
+      activities: starterTrip.activities,
+      notes: starterTrip.notes,
+    });
+    writeAll(trips);
+    return trips;
+  }
   if (trips.length > 0 || window.localStorage.getItem(DEMO_SEEDED_KEY)) return trips;
   const starterTrip = createStarterTrip();
   writeAll([starterTrip]);
