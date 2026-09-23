@@ -7,6 +7,7 @@
 // component — see api.js (TODO) once the backend is ready.
 
 const STORAGE_KEY = "triplist:trips";
+const DEMO_SEEDED_KEY = "triplist:demo-seeded";
 export const DESTINATION_STATUSES = ["next", "otw", "done"];
 
 function uid() {
@@ -44,8 +45,60 @@ function writeAll(trips) {
   }
 }
 
+function createStarterTrip() {
+  return {
+    id: uid(),
+    name: "Clark",
+    start: "2026-11-12",
+    end: "2026-11-17",
+    destinations: [
+      {
+        id: uid(),
+        name: "Clark Museum",
+        notes: "Start the trip with local history and culture.",
+        address: "Clark Museum, Clark Freeport Zone, Pampanga",
+        lat: 15.1857,
+        lng: 120.5454,
+        status: "next",
+      },
+      {
+        id: uid(),
+        name: "Marquee Mall",
+        notes: "Coffee stop and easy first-day shopping.",
+        address: "Marquee Mall, Angeles City, Pampanga",
+        lat: 15.1696,
+        lng: 120.5881,
+        status: "otw",
+      },
+      {
+        id: uid(),
+        name: "Holy Rosary Parish (Pisamban Maragul)",
+        notes: "Visit the heritage district around Santo Rosario.",
+        address: "Holy Rosary Parish, Angeles City, Pampanga",
+        lat: 15.1455,
+        lng: 120.5881,
+        status: "done",
+      },
+    ],
+    activities: [
+      { id: uid(), name: "Try sisig at a local Kapampangan restaurant", done: false },
+      { id: uid(), name: "Find a coffee shop near Clark", done: false },
+    ],
+    notes: "Remember to try sisig, leave room for coffee, and check the map before each stop.",
+  };
+}
+
 export function getTrips() {
-  return readAll();
+  const trips = readAll();
+  if (trips.length > 0 || window.localStorage.getItem(DEMO_SEEDED_KEY)) return trips;
+  const starterTrip = createStarterTrip();
+  writeAll([starterTrip]);
+  try {
+    window.localStorage.setItem(DEMO_SEEDED_KEY, "true");
+  } catch {
+    // The trip still works for the current session if storage is unavailable.
+  }
+  return [starterTrip];
 }
 
 export function getTrip(id) {
