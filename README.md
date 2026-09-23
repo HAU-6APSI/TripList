@@ -1,39 +1,65 @@
 # TripList
 
-Plan weekend trips around Angeles City. A finals project for CS 401,
-Holy Angel University School of Computing.
+TripList helps people plan trips around Angeles City, Pampanga.
 
-Two folders:
+Live site: https://hau-6apsi.github.io/TripList/
 
-- `client/` — React (Vite) front end, styled with the "Parul" design
-  system (see `client/src/styles/tokens.css`).
-- `server/` — Express + PostgreSQL API.
+## What it does
 
-## Current status
+- Create trips with dates.
+- Add destinations, activities, and notes.
+- Mark destinations as Next, OTW, or Done.
+- View destinations on Google Maps.
+- Start directions to a destination.
+- Get local ideas for sisig, coffee, restaurants, breakfast, desserts, and nightlife.
 
-The UI is fully built and working end-to-end right now using a
-temporary `localStorage` data layer (`client/src/lib/storage.js`), so
-you can run just the client and use the whole app immediately:
+## Run the client
 
-```
+```bash
 cd client
 npm install
 npm run dev
 ```
 
-The real backend (`server/`) is also built — routes for trips,
-destinations, and activities, backed by Postgres — but the client isn't
-wired to it yet. See `client/README.md` and `server/README.md` for how
-to connect them (it's a small, deliberate swap: one new `api.js` file
-replacing `storage.js`, same function names throughout).
+Open `http://localhost:5173`.
 
-## Setting this up as your own GitHub repo
+The default mode uses browser storage. No database is needed for this mode.
 
-1. Create your repo from `HAU-6APSI/final-project-template` ("Use this
-   template"), set it to **public**.
-2. Copy `client/` and `server/` (and this README, and `.gitignore`)
-   into it.
-3. Do **not** commit a real `.env` file or your name/student
-   number/email anywhere in this repo — see the finals brief.
-4. Commit as you go, so `project/REPORT.md` in your workspace has real
-   commits to point to.
+## Run the API
+
+The API needs Node.js 20 or newer and PostgreSQL 17.
+
+```bash
+cd server
+npm install
+copy .env.example .env
+npm run db:init
+npm run dev
+```
+
+The API runs at `http://localhost:4000`.
+
+Set these values in `client/.env` to use the API:
+
+```env
+VITE_USE_MOCK_API=false
+VITE_API_BASE_URL=http://localhost:4000
+VITE_GOOGLE_MAPS_API_KEY=your_restricted_browser_key
+```
+
+Never commit a real password, database URL, or API key.
+
+## Project structure
+
+```text
+client/      React and Vite front end
+server/      Express and PostgreSQL API
+docs/        Reports and project documents
+compose.yml  Local PostgreSQL and API setup
+```
+
+## Current status
+
+The demo client is live and working. The real API is implemented but still needs a hosted PostgreSQL database and API deployment.
+
+See [server/README.md](server/README.md) for API routes and [AI-USAGE.md](AI-USAGE.md) for AI use.

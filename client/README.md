@@ -1,54 +1,23 @@
-# TripList — client
+# TripList client
 
-React (Vite) front end for TripList, styled with the "Parul" design
-system (see `src/styles/tokens.css`) — a golden-hour theme inspired by
-Angeles City's Giant Lantern Festival.
+This folder contains the React and Vite front end.
 
-## Structure (atomic design, per M6A2)
+## Run it
 
-```
-src/
-  components/
-    atoms/        Button, Input, Checkbox
-    molecules/     FormField, TripCard, DestinationItem, ActivityItem
-    organisms/     Navbar, TripForm, TripGrid, DestinationList,
-                    ActivityList, TripMap, AddItemModal
-  pages/           TripListPage, NewTripPage, TripPage
-  lib/
-    storage.js     temporary localStorage data layer (see below)
-    places.js      quick-add destination suggestions + date formatting
-    icons.jsx      shared inline SVG icons
-  styles/
-    tokens.css     color / type / spacing tokens
-    global.css     reset + base styles
-  App.jsx          routes
-  main.jsx         entry point
-```
-
-## Running it
-
-```
+```bash
 npm install
 npm run dev
 ```
 
-Opens at `http://localhost:5173`.
+The app uses browser storage by default. Set `VITE_USE_MOCK_API=false` in `.env` to use the Express API.
 
-## About `lib/storage.js`
+## Main folders
 
-The app currently stores trips in the browser via `localStorage`, so the
-UI is fully working on its own before the backend exists. Every function
-in `storage.js` (`getTrips`, `createTrip`, `addDestination`,
-`toggleActivity`, etc.) is written to match the shape the real
-`/api/trips` endpoints will have.
+```text
+src/components/  Reusable interface parts
+src/pages/       Trip list, new trip, and trip detail pages
+src/lib/         Storage, API, maps, places, and icons
+src/styles/      Shared design tokens and global styles
+```
 
-**To connect it to the real Express/Postgres server:** replace the
-`import * as store from "./lib/storage.js"` in `App.jsx` with a new
-`api.js` module that calls `fetch("/api/trips")` etc. using the same
-function names. No component or page needs to change — they only call
-`store.xxx()`, never `localStorage` directly.
-
-`vite.config.js` already proxies `/api` requests to
-`http://localhost:4000` during development, so once `api.js` exists,
-running the Express server alongside `npm run dev` is enough to wire
-everything up.
+The Google Maps key is optional for demo mode. Use a restricted key in `VITE_GOOGLE_MAPS_API_KEY` for live map features.
