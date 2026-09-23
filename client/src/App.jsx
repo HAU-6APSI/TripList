@@ -4,6 +4,7 @@ import TripListPage from "./pages/TripListPage.jsx";
 import NewTripPage from "./pages/NewTripPage.jsx";
 import TripPage from "./pages/TripPage.jsx";
 import * as store from "./lib/storage.js";
+import * as apiStore from "./lib/tripApi.js";
 import { googleMapsDirectionsUrl } from "./lib/googleMaps.js";
 
 /**
@@ -16,26 +17,30 @@ import { googleMapsDirectionsUrl } from "./lib/googleMaps.js";
  */
 export default function App() {
   const [trips, setTrips] = useState([]);
+  const [error, setError] = useState("");
+  const dataStore = import.meta.env.VITE_USE_MOCK_API === "false" ? apiStore : store;
 
   useEffect(() => {
-    setTrips(store.getTrips());
+    dataStore.getTrips().then(setTrips).catch((err) => setError(err.message));
   }, []);
 
-  function refresh() {
-    setTrips(store.getTrips());
+  async function refresh() {
+    setTrips(await dataStore.getTrips());
   }
 
-  function handleCreate(values) {
-    const trip = store.createTrip(values);
-    refresh();
+  async function handleCreate(values) {
+    const trip = await dataStore.createTrip(values);
+    await refresh();
     return trip;
   }
+
+  if (error) return <main className="container"><p>{error}</p></main>;
 
   return (
     <Routes>
       <Route path="/" element={<TripListPage trips={trips} />} />
       <Route path="/trips/new" element={<NewTripPage onCreate={handleCreate} />} />
-      <Route path="/trips/:id" element={<TripPageRoute trips={trips} refresh={refresh} />} />
+      <Route path="/trips/:id" element={<TripPageRoute trips={trips} refresh={refresh} dataStore={dataStore} />} />
     </Routes>
   );
 }
@@ -44,7 +49,7 @@ export default function App() {
  * Looks up the trip named in the URL and hands TripPage a fully bound
  * set of callbacks, so TripPage itself doesn't need to know the trip id.
  */
-function TripPageRoute({ trips, refresh }) {
+function TripPageRoute({ trips, refresh, dataStore }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const trip = trips.find((t) => t.id === id);
@@ -52,26 +57,26 @@ function TripPageRoute({ trips, refresh }) {
   return (
     <TripPage
       trip={trip}
-      onUpdateTrip={(patch) => {
-        store.updateTrip(id, patch);
-        refresh();
+      onUpdateTrip={async (patch) => {
+        await dataStore.updateTrip(id, patch);
+        await refresh();
       }}
-      onDeleteTrip={() => {
-        store.deleteTrip(id);
-        refresh();
+      onDeleteTrip={async () => {
+        await dataStore.deleteTrip(id);
+        await refresh();
         navigate("/");
       }}
-      onAddDestination={(values) => {
-        store.addDestination(id, values);
-        refresh();
+      onAddDestination={async (values) => {
+        await dataStore.addDestination(id, values);
+        await refresh();
       }}
-      onToggleDestination={(destId) => {
-        store.toggleDestination(id, destId);
-        refresh();
+      onToggleDestination={async (destId) => {
+        await dataStore.toggleDestination(id, destId);
+        await refresh();
       }}
-      onUpdateDestinationStatus={(destId, status) => {
-        store.updateDestinationStatus(id, destId, status);
-        refresh();
+      onUpdateDestinationStatus={async (destId, status) => {
+        await dataStore.updateDestinationStatus(id, destId, status);
+        await refresh();
       }}
       onStartNavigation={(destination) => {
         if (!destination) return;
@@ -88,24 +93,24 @@ function TripPageRoute({ trips, refresh }) {
           window.open(googleMapsDirectionsUrl(destination), "_blank", "noopener,noreferrer");
         }
       }}
-      onRemoveDestination={(destId) => {
-        store.removeDestination(id, destId);
-        refresh();
+      onRemoveDestination={async (destId) => {
+        await dataStore.removeDestination(id, destId);
+        await refresh();
       }}
-      onAddActivity={(values) => {
-        store.addActivity(id, values);
-        refresh();
+      onAddActivity={async (values) => {
+        await dataStore.addActivity(id, values);
+        await refresh();
       }}
-      onToggleActivity={(actId) => {
-        store.toggleActivity(id, actId);
-        refresh();
+      onToggleActivity={async (actId) => {
+        await dataStore.toggleActivity(id, actId);
+        await refresh();
       }}
-      onRemoveActivity={(actId) => {
-        store.removeActivity(id, actId);
-        refresh();
+      onRemoveActivity={async (actId) => {
+        await dataStore.removeActivity(id, actId);
+        await refresh();
       }}
-      onUpdateNotes={(notes) => {
-        store.updateNotes(id, notes);
+      onUpdateNotes={async (notes) => {
+        await dataStore.updateNotes(id, notes);
         // Not calling refresh() here on purpose: TripPage manages its own
         // notes textarea state while typing, so re-rendering the whole
         // trip on every keystroke isn't needed and would fight the

@@ -10,8 +10,8 @@ import styles from "./NewTripPage.module.css";
 export default function NewTripPage({ onCreate }) {
   const navigate = useNavigate();
 
-  function handleSubmit(values) {
-    const trip = onCreate(values);
+  async function handleSubmit(values) {
+    const trip = await onCreate(values);
     navigate(`/trips/${trip.id}`);
   }
 

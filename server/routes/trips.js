@@ -13,7 +13,15 @@ function shapeTrip(row, destinations, activities) {
     start: row.start_date,
     end: row.end_date,
     notes: row.notes,
-    destinations: destinations.map((d) => ({ id: d.id, name: d.name, notes: d.notes, done: d.done })),
+    destinations: destinations.map((d) => ({
+      id: d.id,
+      name: d.name,
+      notes: d.notes,
+      address: d.address,
+      lat: d.latitude,
+      lng: d.longitude,
+      status: d.status || (d.done ? "done" : "next"),
+    })),
     activities: activities.map((a) => ({ id: a.id, name: a.name, done: a.done })),
   };
 }
@@ -111,13 +119,17 @@ tripsRouter.delete("/:id", async (req, res) => {
 
 // POST /api/trips/:id/destinations
 tripsRouter.post("/:id/destinations", async (req, res) => {
-  const { name, notes = "" } = req.body;
+  const { name, notes = "", address = "", lat = null, lng = null, status = "next" } = req.body;
   if (!name) return res.status(400).json({ error: "name is required." });
   try {
-    await pool.query("insert into destinations (trip_id, name, notes) values ($1, $2, $3)", [
+    await pool.query("insert into destinations (trip_id, name, notes, address, latitude, longitude, status, done) values ($1, $2, $3, $4, $5, $6, $7, $7 = 'done')", [
       req.params.id,
       name,
       notes,
+      address,
+      lat,
+      lng,
+      status,
     ]);
     const trip = await loadFullTrip(req.params.id);
     res.status(201).json(trip);
@@ -129,7 +141,7 @@ tripsRouter.post("/:id/destinations", async (req, res) => {
 
 // PATCH /api/trips/:id/destinations/:destId — toggle done or edit fields
 tripsRouter.patch("/:id/destinations/:destId", async (req, res) => {
-  const { name, notes, done } = req.body;
+  const { name, notes, done, status, address, lat, lng, toggle } = req.body;
   try {
     const existing = await pool.query("select * from destinations where id = $1 and trip_id = $2", [
       req.params.destId,
@@ -137,10 +149,15 @@ tripsRouter.patch("/:id/destinations/:destId", async (req, res) => {
     ]);
     if (existing.rows.length === 0) return res.status(404).json({ error: "Destination not found." });
     const current = existing.rows[0];
-    await pool.query("update destinations set name = $1, notes = $2, done = $3 where id = $4", [
+    const nextStatus = toggle ? (current.status === "done" ? "next" : "done") : status ?? current.status ?? (done ? "done" : "next");
+    await pool.query("update destinations set name = $1, notes = $2, address = $3, latitude = $4, longitude = $5, status = $6, done = $7 where id = $8", [
       name ?? current.name,
       notes ?? current.notes,
-      done ?? current.done,
+      address ?? current.address ?? "",
+      lat ?? current.latitude,
+      lng ?? current.longitude,
+      nextStatus,
+      nextStatus === "done",
       req.params.destId,
     ]);
     const trip = await loadFullTrip(req.params.id);
@@ -192,9 +209,10 @@ tripsRouter.patch("/:id/activities/:actId", async (req, res) => {
     ]);
     if (existing.rows.length === 0) return res.status(404).json({ error: "Activity not found." });
     const current = existing.rows[0];
+    const nextDone = req.body.toggle ? !current.done : done ?? current.done;
     await pool.query("update activities set name = $1, done = $2 where id = $3", [
       name ?? current.name,
-      done ?? current.done,
+      nextDone,
       req.params.actId,
     ]);
     const trip = await loadFullTrip(req.params.id);

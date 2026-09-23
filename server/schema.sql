@@ -20,6 +20,10 @@ create table if not exists destinations (
   name text not null,
   notes text not null default '',
   done boolean not null default false,
+  status text not null default 'next',
+  address text not null default '',
+  latitude double precision,
+  longitude double precision,
   created_at timestamptz not null default now()
 );
 
@@ -33,3 +37,8 @@ create table if not exists activities (
 
 create index if not exists idx_destinations_trip_id on destinations(trip_id);
 create index if not exists idx_activities_trip_id on activities(trip_id);
+
+alter table destinations add column if not exists status text not null default 'next';
+alter table destinations add column if not exists address text not null default '';
+alter table destinations add column if not exists latitude double precision;
+alter table destinations add column if not exists longitude double precision;
