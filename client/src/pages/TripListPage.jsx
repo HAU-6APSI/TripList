@@ -72,6 +72,30 @@ export default function TripListPage({ trips }) {
             </div>
           </aside>
         </div>
+
+        <section className={styles.cityGuide}>
+          <div className={styles.guideHeading}>
+            <div>
+              <span className={styles.kicker}>A little local context</span>
+              <h2>Build a day around Angeles.</h2>
+            </div>
+            <p>Start with a flavor, a place, or a slow hour. Add the details to a trip when you are ready.</p>
+          </div>
+          <div className={styles.guideGrid}>
+            <article className={`${styles.guideTile} ${styles.foodTile}`}>
+              <span className={styles.tileTag}>Eat</span>
+              <div><h3>Sisig first</h3><p>Make room for Kapampangan food and the stories behind it.</p></div>
+            </article>
+            <article className={`${styles.guideTile} ${styles.heritageTile}`}>
+              <span className={styles.tileTag}>Wander</span>
+              <div><h3>Santo Rosario</h3><p>Walk the heritage district, then pause at Holy Rosary Parish.</p></div>
+            </article>
+            <article className={`${styles.guideTile} ${styles.clarkTile}`}>
+              <span className={styles.tileTag}>Pause</span>
+              <div><h3>Clark and coffee</h3><p>Leave space for a coffee stop between the bigger plans.</p></div>
+            </article>
+          </div>
+        </section>
       </main>
     </>
   );

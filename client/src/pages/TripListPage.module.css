@@ -1,7 +1,10 @@
 .duskband {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--color-dusk) 0%, var(--color-dusk-2) 46%, var(--color-amber-deep) 100%);
+  background-image: linear-gradient(110deg, rgba(33, 42, 74, 0.94), rgba(59, 52, 102, 0.72), rgba(200, 127, 34, 0.7)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Angeles%20Heritage%20District.jpg?width=2200");
+  background-position: center 42%;
+  background-size: cover;
   color: var(--color-paper);
 }
 .duskband::after {
@@ -225,6 +228,97 @@
   line-height: 1.4;
 }
 
+.cityGuide {
+  padding: 0 0 72px;
+}
+
+.guideHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+.guideHeading h2 {
+  margin-top: 5px;
+  color: var(--color-dusk);
+  font-size: 25px;
+}
+
+.guideHeading p {
+  max-width: 320px;
+  color: var(--color-ink-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.guideTile {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  border: 1px solid rgba(255, 253, 248, 0.35);
+  border-radius: 14px;
+  overflow: hidden;
+  color: var(--color-paper);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 12px 26px rgba(35, 26, 10, 0.13);
+}
+
+.guideTile::before {
+  content: "";
+  position: absolute;
+}
+
+.foodTile {
+  background-image: linear-gradient(160deg, rgba(54, 33, 38, 0.35), rgba(54, 33, 38, 0.94)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Behind%20Marquee%20Mall.jpg?width=1000");
+}
+
+.heritageTile {
+  background-image: linear-gradient(160deg, rgba(33, 42, 74, 0.25), rgba(33, 42, 74, 0.94)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Angeles%20Heritage%20District.jpg?width=1000");
+}
+
+.clarkTile {
+  background-image: linear-gradient(160deg, rgba(44, 70, 67, 0.25), rgba(25, 48, 48, 0.94)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/ClarkAngelesjf9644_32.JPG?width=1000");
+}
+
+.tileTag {
+  align-self: flex-start;
+  padding: 5px 8px;
+  border: 1px solid rgba(251, 243, 229, 0.35);
+  border-radius: 99px;
+  color: var(--color-amber);
+  background: rgba(20, 16, 32, 0.28);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.guideTile h3 {
+  font-size: 21px;
+}
+
+.guideTile p {
+  max-width: 220px;
+  margin-top: 5px;
+  color: rgba(251, 243, 229, 0.78);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 @media (max-width: 820px) {
   .dashboard {
     grid-template-columns: 1fr;
@@ -232,6 +326,24 @@
 
   .overview {
     position: static;
+  }
+
+  .guideHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guideHeading p {
+    max-width: 500px;
+  }
+
+  .guideGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .guideTile {
+    min-height: 150px;
   }
 }
 
