@@ -170,6 +170,7 @@ export default function TripPage({
               onToggle={onToggleActivity}
               onRemove={onRemoveActivity}
               onAdd={() => setModal("activity")}
+              onQuickAdd={(name) => onAddActivity({ name })}
             />
             <div className={styles.notesCard}>
               <div className={styles.notesHeader}>
@@ -188,6 +189,21 @@ export default function TripPage({
               <div className={styles.notesFooter}>
                 <span className={styles.savedHint}>{savedHint}</span>
                 <span>Autosaves as you type</span>
+              </div>
+              <div className={styles.noteStarters}>
+                {[
+                  "Places to visit: ",
+                  "Food to try: ",
+                  "Things to remember: ",
+                ].map((starter) => (
+                  <button key={starter} type="button" onClick={() => {
+                    const value = notesValue ? `${notesValue}\n${starter}` : starter;
+                    setNotesValue(value);
+                    onUpdateNotes(value);
+                  }}>
+                    + {starter.replace(": ", "")}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

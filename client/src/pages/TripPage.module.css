@@ -202,6 +202,27 @@
   font-size: 11px;
 }
 
+.noteStarters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.noteStarters button {
+  border: 1px solid var(--color-border);
+  border-radius: 99px;
+  padding: 5px 8px;
+  color: var(--color-ink-soft);
+  background: var(--color-surface);
+  font-size: 10px;
+}
+
+.noteStarters button:hover {
+  border-color: var(--color-ember);
+  color: var(--color-ember-deep);
+}
+
 .notFound {
   border: 1.5px dashed var(--color-border);
   border-radius: 18px;

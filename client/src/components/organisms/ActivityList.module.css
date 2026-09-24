@@ -68,6 +68,41 @@
   padding: 12px 4px 0;
 }
 
+.ideaList {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.idea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--color-ink);
+  background: rgba(251, 243, 229, 0.56);
+  text-align: left;
+}
+
+.idea:hover {
+  border-color: var(--color-ember);
+  background: #fff;
+}
+
+.idea span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.idea small {
+  flex-shrink: 0;
+  color: var(--color-ink-soft);
+  font-size: 10px;
+}
+
 .timeline {
   position: relative;
   margin-top: 14px;
