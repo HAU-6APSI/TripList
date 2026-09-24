@@ -15,7 +15,8 @@
 }
 
 .canvas {
-  height: clamp(560px, calc(100vh - 150px), 760px);
+  min-height: 620px;
+  height: clamp(620px, calc(100vh - 150px), 820px);
   position: relative;
   overflow: hidden;
   background: #dfe8e1;
@@ -23,6 +24,7 @@
 
 @media (max-width: 767px) {
   .canvas {
+    min-height: 0;
     height: 390px;
   }
 }

@@ -68,8 +68,8 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
   padding: 34px 0 70px;
   align-items: start;
 }
