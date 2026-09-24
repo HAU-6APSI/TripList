@@ -4,12 +4,13 @@
   border-radius: 20px;
   padding: var(--space-4);
   width: 100%;
-  max-width: 460px;
+  max-width: 520px;
+  padding: clamp(28px, 4vw, 42px);
   box-shadow: var(--shadow-card);
 }
 
 .panel h2 {
-  font-size: 23px;
+  font-size: 28px;
   margin-bottom: 4px;
 }
 

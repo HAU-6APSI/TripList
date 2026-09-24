@@ -22,6 +22,17 @@ export default function NewTripPage({ onCreate }) {
       </div>
       <main className="container">
         <div className={styles.wrap}>
+          <section className={styles.intro}>
+            <span className={styles.eyebrow}>Angeles City · Pampanga</span>
+            <h1>Give the weekend a shape.</h1>
+            <p>Start with the dates and a feeling. You can add places, food stops, activities, and notes next.</p>
+            <div className={styles.introImage} aria-hidden="true" />
+            <div className={styles.introQuote}>
+              <span>✦</span>
+              <strong>Manyaman days ahead.</strong>
+              <small>Good food, easy walks, and room for a slow coffee.</small>
+            </div>
+          </section>
           <TripForm onSubmit={handleSubmit} onCancel={() => navigate("/")} />
         </div>
       </main>
