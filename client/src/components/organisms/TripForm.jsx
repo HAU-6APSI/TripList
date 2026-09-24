@@ -3,6 +3,13 @@ import FormField from "../molecules/FormField.jsx";
 import Button from "../atoms/Button.jsx";
 import styles from "./TripForm.module.css";
 
+const TRIP_IDEAS = [
+  { name: "Clark food and coffee weekend", place: "Clark Freeport" },
+  { name: "Angeles heritage and sisig day", place: "Santo Rosario" },
+  { name: "Pampanga food crawl", place: "Kapampangan cuisine" },
+  { name: "Slow weekend around Marquee Mall", place: "Pulung Maragul" },
+];
+
 /**
  * TripForm — organism (reused by New Trip and Edit Trip, per M6A2)
  * Props: trip (existing trip to edit, or null for create), onSubmit({name,start,end}), onCancel
@@ -14,6 +21,10 @@ export default function TripForm({ trip = null, onSubmit, onCancel }) {
   const [error, setError] = useState("");
 
   const isEdit = Boolean(trip);
+  const visibleIdeas = TRIP_IDEAS.filter((idea) => {
+    const query = name.trim().toLowerCase();
+    return !query || `${idea.name} ${idea.place}`.toLowerCase().includes(query);
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -44,6 +55,23 @@ export default function TripForm({ trip = null, onSubmit, onCancel }) {
         placeholder="e.g. Baguio-style weekend in Clark"
         required
       />
+
+      {!isEdit && (
+        <div className={styles.ideas}>
+          <div className={styles.ideasHeader}>
+            <strong>Popular local themes</strong>
+            <span>Tap to use one</span>
+          </div>
+          <div className={styles.ideaList}>
+            {visibleIdeas.map((idea) => (
+              <button key={idea.name} type="button" className={styles.idea} onClick={() => setName(idea.name)}>
+                <span>{idea.name}</span>
+                <small>{idea.place}</small>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className={styles.row}>
         <FormField
