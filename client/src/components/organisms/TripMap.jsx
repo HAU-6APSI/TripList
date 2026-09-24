@@ -172,8 +172,32 @@ export default function TripMap({ destinations, onAddDestination }) {
           </div>
         )}
       </div>
-      <div className={styles.footer}>
-        {destinations.length ? `${destinations.length} destination${destinations.length === 1 ? "" : "s"} on this trip` : "Famous places are ready to add"}
+      <div className={styles.mapDetails}>
+        <div className={styles.footer}>
+          <strong>{destinations.length ? "Your map plan" : "Start your map plan"}</strong>
+          <span>{destinations.length ? `${destinations.length} place${destinations.length === 1 ? "" : "s"} saved` : "Famous places are ready to add"}</span>
+        </div>
+        {destinations.length > 0 ? (
+          <>
+            <div className={styles.mapStats}>
+              <span><b>{destinations.filter((d) => (d.status || (d.done ? "done" : "next")) === "next").length}</b> Next</span>
+              <span><b>{destinations.filter((d) => (d.status || "next") === "otw").length}</b> OTW</span>
+              <span><b>{destinations.filter((d) => (d.status || (d.done ? "done" : "next")) === "done").length}</b> Done</span>
+            </div>
+            <div className={styles.upcomingList}>
+              <span className={styles.detailsLabel}>Up next</span>
+              {destinations.filter((d) => (d.status || (d.done ? "done" : "next")) !== "done").slice(0, 3).map((destination) => (
+                <div key={destination.id} className={styles.upcomingItem}>
+                  <span className={styles.upcomingDot} />
+                  <span>{destination.name}</span>
+                </div>
+              ))}
+              {!destinations.some((d) => (d.status || (d.done ? "done" : "next")) !== "done") && <span className={styles.allDone}>Every place is complete.</span>}
+            </div>
+          </>
+        ) : (
+          <p className={styles.mapTip}>Choose a famous place from the map or add a destination to start planning your route.</p>
+        )}
       </div>
     </div>
   );
