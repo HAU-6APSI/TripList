@@ -44,6 +44,54 @@
   gap: 8px;
 }
 
+.featuredList {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 253, 248, 0.95);
+  box-shadow: 0 8px 24px rgba(35, 26, 10, 0.18);
+}
+
+.featuredList > strong {
+  padding: 2px 3px 4px;
+  color: var(--color-dusk);
+  font-size: 12px;
+}
+
+.featuredList button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  padding: 6px 8px;
+  color: var(--color-ink);
+  background: rgba(251, 243, 229, 0.8);
+  text-align: left;
+}
+
+.featuredList button:hover {
+  border-color: var(--color-ember);
+  background: #fff;
+}
+
+.featuredList span {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.featuredList small {
+  color: var(--color-ink-soft);
+  font-size: 9px;
+}
+
 .embedFallback {
   position: absolute;
   inset: 0;

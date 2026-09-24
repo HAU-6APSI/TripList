@@ -3,6 +3,13 @@ import { CompassIcon } from "../../lib/icons.jsx";
 import { googleMapsEmbedUrl, loadGoogleMaps } from "../../lib/googleMaps.js";
 import styles from "./TripMap.module.css";
 
+const FEATURED_PLACES = [
+  { name: "Holy Rosary Parish", address: "Santo Rosario, Angeles City", lat: 15.1455, lng: 120.5881 },
+  { name: "Clark Museum", address: "Clark Freeport Zone, Pampanga", lat: 15.1857, lng: 120.5454 },
+  { name: "Marquee Mall", address: "Pulung Maragul, Angeles City", lat: 15.1696, lng: 120.5881 },
+  { name: "Nayong Pilipino sa Clark", address: "Clark Freeport Zone, Pampanga", lat: 15.1752, lng: 120.5265 },
+];
+
 /**
  * TripMap — organism
  * Props: destinations
@@ -10,12 +17,13 @@ import styles from "./TripMap.module.css";
 export default function TripMap({ destinations, onAddDestination }) {
   const mapElement = useRef(null);
   const mapRef = useRef(null);
+  const clickListenerRef = useRef(null);
   const selectedMarkerRef = useRef(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [mapError, setMapError] = useState(null);
 
   useEffect(() => {
-    if (!destinations.length || !mapElement.current) return undefined;
+    if (!mapElement.current) return undefined;
 
     let disposed = false;
     let map;
@@ -35,7 +43,7 @@ export default function TripMap({ destinations, onAddDestination }) {
         mapRef.current = map;
 
         const geocoder = new maps.Geocoder();
-        const clickListener = map.addListener("click", ({ latLng }) => {
+        clickListenerRef.current = map.addListener("click", ({ latLng }) => {
           geocoder.geocode({ location: latLng }, (results, status) => {
             if (status !== "OK" || !results?.[0]) return;
             const result = results[0];
@@ -53,8 +61,9 @@ export default function TripMap({ destinations, onAddDestination }) {
             });
           });
         });
+        const placesToShow = destinations.length ? destinations.slice(0, 20) : FEATURED_PLACES;
         const locations = await Promise.all(
-          destinations.slice(0, 20).map((destination) => {
+          placesToShow.map((destination) => {
             if (Number.isFinite(destination.lat) && Number.isFinite(destination.lng)) {
               return Promise.resolve({ destination, location: new maps.LatLng(destination.lat, destination.lng) });
             }
@@ -76,7 +85,7 @@ export default function TripMap({ destinations, onAddDestination }) {
             position: location,
             title: `${destination.name} (${status.toUpperCase()})`,
             label: {
-              text: destination.name,
+              text: destinations.length ? destination.name : `★ ${destination.name}`,
               color: "#203238",
               fontWeight: "700",
               fontSize: "12px",
@@ -102,7 +111,8 @@ export default function TripMap({ destinations, onAddDestination }) {
 
     return () => {
       disposed = true;
-      if (map) maps.event?.removeListener?.(clickListener);
+      if (clickListenerRef.current && window.google?.maps?.event) window.google.maps.event.removeListener(clickListenerRef.current);
+      clickListenerRef.current = null;
       mapRef.current = null;
       if (selectedMarkerRef.current) selectedMarkerRef.current.setMap(null);
       markers.forEach((marker) => marker.setMap(null));
@@ -112,23 +122,26 @@ export default function TripMap({ destinations, onAddDestination }) {
   return (
     <div className={styles.card}>
       <div className={`${styles.canvas} ${mapError ? styles.fallback : ""}`} ref={mapElement}>
-        {destinations.length === 0 ? (
-          <div className={styles.empty}>
-            <CompassIcon size={26} />
-            <span>No destinations pinned yet</span>
-          </div>
-        ) : mapError ? (
+        {mapError ? (
           <div className={styles.embedFallback}>
             <iframe
-              title={`Google Maps preview for ${destinations[0].name}`}
-              src={googleMapsEmbedUrl(destinations[0].name)}
+              title="Google Maps preview for Angeles City"
+              src={googleMapsEmbedUrl("Angeles City, Pampanga")}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
         ) : null}
-        {destinations.length > 0 && !mapError && (
-          <div className={styles.mapHint}>N Next · O OTW · D Done</div>
+        {!mapError && <div className={styles.mapHint}>{destinations.length ? "N Next · O OTW · D Done" : "Featured places in Angeles City"}</div>}
+        {destinations.length === 0 && (
+          <div className={styles.featuredList}>
+            <strong>Start with a famous place</strong>
+            {FEATURED_PLACES.map((place) => (
+              <button key={place.name} type="button" onClick={() => onAddDestination?.({ ...place, notes: place.address })}>
+                <span>{place.name}</span><small>{place.address}</small>
+              </button>
+            ))}
+          </div>
         )}
         {selectedPlace && !mapError && (
           <div className={styles.selectedPlace}>
@@ -160,7 +173,7 @@ export default function TripMap({ destinations, onAddDestination }) {
         )}
       </div>
       <div className={styles.footer}>
-        {destinations.length ? `${destinations.length} destination${destinations.length === 1 ? "" : "s"} on this trip` : "Pins appear here once you add destinations"}
+        {destinations.length ? `${destinations.length} destination${destinations.length === 1 ? "" : "s"} on this trip` : "Famous places are ready to add"}
       </div>
     </div>
   );
