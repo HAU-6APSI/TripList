@@ -10,6 +10,13 @@ const FEATURED_PLACES = [
   { name: "Nayong Pilipino sa Clark", address: "Clark Freeport Zone, Pampanga", lat: 15.1752, lng: 120.5265 },
 ];
 
+const LOCAL_NEARBY_PICKS = [
+  { name: "Café Fleur", type: "Restaurant · Kapampangan food" },
+  { name: "Museo ning Angeles", type: "Heritage · Santo Rosario" },
+  { name: "Fields Avenue", type: "Food · nightlife" },
+  { name: "Clark Parade Grounds", type: "Outdoors · Clark" },
+];
+
 /**
  * TripMap — organism
  * Props: destinations
@@ -21,6 +28,7 @@ export default function TripMap({ destinations, onAddDestination }) {
   const selectedMarkerRef = useRef(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [mapError, setMapError] = useState(null);
+  const [nearbyPicks, setNearbyPicks] = useState(LOCAL_NEARBY_PICKS);
 
   useEffect(() => {
     if (!mapElement.current) return undefined;
@@ -41,6 +49,22 @@ export default function TripMap({ destinations, onAddDestination }) {
           gestureHandling: "cooperative",
         });
         mapRef.current = map;
+
+        const nearbyQuery = destinations[0]?.name
+          ? `popular places near ${destinations[0].name}, Angeles City, Pampanga`
+          : "popular places in Angeles City, Pampanga";
+        if (maps.places?.PlacesService) {
+          const placesService = new maps.places.PlacesService(map);
+          placesService.textSearch({ query: nearbyQuery }, (results, status) => {
+            if (status === "OK" && results?.length) {
+              setNearbyPicks(results.slice(0, 4).map((place) => ({
+                name: place.name,
+                type: place.types?.find((type) => type !== "point_of_interest")?.replaceAll("_", " ") || "Popular nearby place",
+                address: place.formatted_address,
+              })));
+            }
+          });
+        }
 
         const geocoder = new maps.Geocoder();
         clickListenerRef.current = map.addListener("click", ({ latLng }) => {
@@ -194,9 +218,24 @@ export default function TripMap({ destinations, onAddDestination }) {
               ))}
               {!destinations.some((d) => (d.status || (d.done ? "done" : "next")) !== "done") && <span className={styles.allDone}>Every place is complete.</span>}
             </div>
+            <div className={styles.nearbyList}>
+              <span className={styles.detailsLabel}>Popular nearby</span>
+              {nearbyPicks.map((place) => (
+                <div key={place.name} className={styles.nearbyItem}>
+                  <span className={styles.nearbyIcon}>✦</span>
+                  <div><strong>{place.name}</strong><small>{place.address || place.type}</small></div>
+                </div>
+              ))}
+            </div>
           </>
         ) : (
-          <p className={styles.mapTip}>Choose a famous place from the map or add a destination to start planning your route.</p>
+          <>
+            <p className={styles.mapTip}>Choose a famous place from the map or add a destination to start planning your route.</p>
+            <div className={styles.nearbyList}>
+              <span className={styles.detailsLabel}>Popular nearby</span>
+              {nearbyPicks.map((place) => <div key={place.name} className={styles.nearbyItem}><span className={styles.nearbyIcon}>✦</span><div><strong>{place.name}</strong><small>{place.type}</small></div></div>)}
+            </div>
+          </>
         )}
       </div>
     </div>

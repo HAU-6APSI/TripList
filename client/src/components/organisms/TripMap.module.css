@@ -271,3 +271,35 @@
   margin: 0 16px;
   padding-bottom: 18px;
 }
+
+.nearbyList {
+  padding: 0 16px 16px;
+}
+
+.nearbyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 0;
+}
+
+.nearbyIcon {
+  color: var(--color-amber-deep);
+  font-size: 13px;
+}
+
+.nearbyItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nearbyItem strong {
+  color: var(--color-ink);
+  font-size: 11px;
+}
+
+.nearbyItem small {
+  color: var(--color-ink-soft);
+  font-size: 10px;
+}
