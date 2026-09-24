@@ -74,6 +74,58 @@
   align-items: start;
 }
 
+.completionNotice {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 28px;
+  padding: 14px 16px;
+  border: 1px solid rgba(98, 130, 90, 0.35);
+  border-radius: 13px;
+  color: #28552d;
+  background: linear-gradient(110deg, #edf6e9, #fff8df);
+  box-shadow: 0 8px 22px rgba(58, 89, 53, 0.12);
+}
+
+.completionIcon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: white;
+  background: var(--color-sage);
+  font-weight: 800;
+}
+
+.completionText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.completionText strong {
+  font-size: 14px;
+}
+
+.completionText span,
+.completionText small {
+  color: #557052;
+  font-size: 12px;
+}
+
+.completionNotice > button {
+  align-self: flex-start;
+  border: 0;
+  padding: 0 2px;
+  color: #557052;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+}
+
 .layout > div:first-child {
   min-width: 0;
 }

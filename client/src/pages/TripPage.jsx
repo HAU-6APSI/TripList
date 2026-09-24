@@ -36,9 +36,21 @@ export default function TripPage({
   const [modal, setModal] = useState(null); // "destination" | "activity" | null
   const [notesValue, setNotesValue] = useState(trip?.notes || "");
   const [savedHint, setSavedHint] = useState("Saved automatically");
+  const [completionNotice, setCompletionNotice] = useState(false);
   const notesTimer = useRef(null);
+  const previousCompleted = useRef(null);
 
   useEffect(() => () => clearTimeout(notesTimer.current), []);
+
+  useEffect(() => {
+    const currentDestinations = trip?.destinations || [];
+    const completed = currentDestinations.filter((destination) => (destination.status || (destination.done ? "done" : "next")) === "done").length;
+    const allDone = currentDestinations.length > 0 && completed === currentDestinations.length;
+    if (previousCompleted.current !== null && completed > previousCompleted.current && allDone) {
+      setCompletionNotice(true);
+    }
+    previousCompleted.current = completed;
+  }, [trip]);
 
   if (!trip) {
     return (
@@ -61,6 +73,9 @@ export default function TripPage({
 
   const destinations = trip.destinations || [];
   const activities = trip.activities || [];
+  const completedDestinations = destinations.filter((destination) => (destination.status || (destination.done ? "done" : "next")) === "done").length;
+  const allDestinationsDone = destinations.length > 0 && completedDestinations === destinations.length;
+
   function handleNotesChange(e) {
     const value = e.target.value;
     setNotesValue(value);
@@ -128,6 +143,17 @@ export default function TripPage({
       </div>
 
       <main className="container">
+        {completionNotice && allDestinationsDone && (
+          <section className={styles.completionNotice} role="status">
+            <div className={styles.completionIcon}>✓</div>
+            <div className={styles.completionText}>
+              <strong>Trip destinations complete!</strong>
+              <span>You finished all {completedDestinations} place{completedDestinations === 1 ? "" : "s"} for {trip.name}.</span>
+              <small>{activities.filter((activity) => !activity.done).length ? `${activities.filter((activity) => !activity.done).length} activities still to do.` : "Your activities are complete too."}</small>
+            </div>
+            <button type="button" onClick={() => setCompletionNotice(false)} aria-label="Dismiss completion notice">×</button>
+          </section>
+        )}
         <div className={styles.layout}>
           <div>
             <DestinationList

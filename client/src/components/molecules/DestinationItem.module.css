@@ -59,6 +59,24 @@
   color: var(--color-dusk);
 }
 
+.nameLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.doneBadge {
+  padding: 3px 6px;
+  border-radius: 99px;
+  color: #27602c;
+  background: rgba(143, 217, 134, 0.3);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .done {
   color: var(--color-ink-soft);
   text-decoration: line-through;

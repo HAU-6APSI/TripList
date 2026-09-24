@@ -15,7 +15,10 @@ export default function DestinationItem({ name, notes, address, status, onUpdate
   return (
     <div className={styles.row}>
       <div className={styles.text}>
-        <div className={`${styles.name} ${status === "done" ? styles.done : ""}`}>{name}</div>
+        <div className={styles.nameLine}>
+          <div className={`${styles.name} ${status === "done" ? styles.done : ""}`}>{name}</div>
+          {status === "done" && <span className={styles.doneBadge}>Completed</span>}
+        </div>
         {address && address !== notes && <div className={styles.address}>{address}</div>}
         {notes && <div className={styles.notes}>{notes}</div>}
       </div>
